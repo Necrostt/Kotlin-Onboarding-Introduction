@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="Test" tests="1" skipped="0" failures="0" errors="0" timestamp="2024-09-16T19:01:09" hostname="HP-GABRIEL" time="0.067">
+  <properties/>
+  <testcase name="testSolution()" classname="Test" time="0.067"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
