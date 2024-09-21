@@ -37,7 +37,9 @@
     <output-test url="file://$MODULE_DIR$/../../../../WarmUp/task/out/test/classes" />
     <exclude-output />
     <content url="file://$MODULE_DIR$/../../../../WarmUp/task/src/test" />
-    <content url="file://$MODULE_DIR$/../../../../WarmUp/task/test" />
+    <content url="file://$MODULE_DIR$/../../../../WarmUp/task/test">
+      <sourceFolder url="file://$MODULE_DIR$/../../../../WarmUp/task/test" isTestSource="true" />
+    </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="CSC_Kotlin_Course.WarmUp-task.main" />

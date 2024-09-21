@@ -24,7 +24,10 @@ fun countPartialMatches(secret: String, guess: String): Int {
 fun countExactMatches(secret: String, guess: String): Int =
     guess.filterIndexed { index, letter -> letter == secret[index] }.length
 
-fun generateSecret() = "ABCD"
+fun generateSecret(wordLength: Int, alphabet: String): String{
+    val secret = List(wordLength){alphabet.random()}.joinToString ("")
+    return secret
+}
 
 fun isComplete(secret: String, guess: String) = secret == guess
 
@@ -38,12 +41,37 @@ fun isWon(complete: Boolean, attempts: Int, maxAttemptsCount: Int) = complete &&
 
 fun isLost(complete: Boolean, attempts: Int, maxAttemptsCount: Int) = !complete && attempts > maxAttemptsCount
 
-fun playGame(secret: String, wordLength: Int, maxAttemptsCount: Int) {
+fun isCorrectInput(userInput: String, wordLength: Int, alphabet: String): Boolean{
+    if (userInput.isEmpty()) {
+        println("Please enter a word!")
+        return false
+    }
+    if (userInput.length != wordLength) {
+        println("The length of your guess should be $wordLength characters! Try again!")
+        return false
+    }
+    val notInAlphabet = userInput.filter { it !in alphabet }
+    if (notInAlphabet.isNotEmpty()) {
+        println("All symbols in your guess should be the $alphabet alphabet characters! Try again!")
+        return false
+    }
+    return true
+
+}
+fun safeUserInput(wordLength: Int, alphabet: String): String {
+    var userInput: String
+    do {
+        println("Please input your guess. It should be of length $wordLength, and each symbol should be from the alphabet: $alphabet.")
+         userInput = safeReadLine()
+    } while (!isCorrectInput(userInput, wordLength, alphabet))
+    return userInput
+}
+
+fun playGame(secret: String, wordLength: Int, maxAttemptsCount: Int, alphabet: String) {
     var complete: Boolean
     var attempts = 0
     do {
-        println("Please input your guess. It should be of length $wordLength.")
-        val guess = safeReadLine()
+        val guess = safeUserInput(wordLength, alphabet)
         printRoundResults(secret, guess)
         complete = isComplete(secret, guess)
         attempts++
@@ -52,6 +80,7 @@ fun playGame(secret: String, wordLength: Int, maxAttemptsCount: Int) {
             break
         } else if (isWon(complete, attempts, maxAttemptsCount)) {
             println("Congratulations! You guessed it!")
+
         }
     } while (!complete)
 }
@@ -60,6 +89,8 @@ fun main() {
     val wordLength = 4
     val maxAttemptsCount = 3
     val secretExample = "ACEB"
+    val alphabet = "ABCDEFG"
+    val secret = generateSecret(wordLength,alphabet)
     println(getGameRules(wordLength, maxAttemptsCount, secretExample))
-    playGame(generateSecret(), wordLength, maxAttemptsCount)
+    playGame(secret, wordLength, maxAttemptsCount, alphabet)
 }

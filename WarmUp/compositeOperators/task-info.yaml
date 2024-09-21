@@ -7,6 +7,6 @@ files:
   - name: src/main/kotlin/jetbrains/kotlin/course/warmup/Main.kt
     visible: true
     learner_created: false
-status: Unchecked
-record: -1
+status: Solved
+record: 39
 post_submission_on_open: true
